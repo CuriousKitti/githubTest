@@ -1,7 +1,7 @@
 package dataDrivenTests;
 
 import java.io.IOException;
-
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+
 import data.testData;
 
 public class loginTest {
@@ -22,12 +23,13 @@ public class loginTest {
 	WebDriver driver;
 
 	@BeforeMethod
-	public void setUp() {
+	public void setUp(){
 
 		System.setProperty("webdriver.chrome.driver", "D:\\Testing\\Eclipse\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.get("https://www.dollardays.com/");
 
 	}
