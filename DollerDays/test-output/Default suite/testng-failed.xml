@@ -5,9 +5,7 @@
     <classes>
       <class name="dataDrivenTests.loginTest">
         <methods>
-          <include name="login" invocation-numbers="1 2"/>
-          <include name="tearDown"/>
-          <include name="setUp"/>
+          <include name="login" invocation-numbers="0 1 2"/>
         </methods>
       </class> <!-- dataDrivenTests.loginTest -->
     </classes>

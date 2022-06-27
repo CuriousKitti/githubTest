@@ -28,9 +28,8 @@ public class testData {
 			Row row = st.getRow(i);
 			String userName= row.getCell(0).getStringCellValue();
 			String password = row.getCell(1).getStringCellValue();
-			String name = row.getCell(2).getStringCellValue();
-			
-			Object[] obj = {userName,password,name};
+				
+			Object[] obj = {userName,password};
 			testData.add(obj);
 		}
 		return testData;

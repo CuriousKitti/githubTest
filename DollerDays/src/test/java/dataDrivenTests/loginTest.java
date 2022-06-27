@@ -6,24 +6,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.poi.EncryptedDocumentException;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-
 import data.testData;
+import locators.webLocators;
 
 public class loginTest {
 
-	WebDriver driver;
+	public static WebDriver driver;
 
-	@BeforeMethod
-	public void setUp(){
+	public static WebDriver setUp() {
 
 		System.setProperty("webdriver.chrome.driver", "D:\\Testing\\Eclipse\\chromedriver.exe");
 		driver = new ChromeDriver();
@@ -31,7 +29,7 @@ public class loginTest {
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.get("https://www.dollardays.com/");
-
+		return driver;
 	}
 
 	@DataProvider
@@ -43,21 +41,19 @@ public class loginTest {
 	}
 
 	@Test(dataProvider = "getTestData")
-	public void login(String uname, String pwd, String name) {
+	public static void login(String uname, String pwd) {
 
-		driver.findElement(By.xpath("//span[contains(text(),'Sign in')]")).click();
-		driver.findElement(By.xpath("//a[contains(text(),'Sign In')]")).click();
-		driver.findElement(By.xpath("//input[@id='inputLoginUsername']")).sendKeys(uname);
-		driver.findElement(By.xpath("//input[@id='inputLoginPassword']")).sendKeys(pwd);
-		driver.findElement(By.xpath("//button[contains(text(),'Sign in')]")).click();
-		driver.findElement(By.xpath("//img[@class='header-user']")).click();
-		String actual_name = driver.findElement(By.xpath("//li[@class='account-title']")).getText();
-		Assert.assertEquals(actual_name, name);
-	}
+		WebElement[] webElement = webLocators.try1();
 
-	@AfterMethod
-	public void tearDown() {
-		driver.quit();
+		WebElement userNameTxtBox, passwordTxtBox, signInBtn;
+		userNameTxtBox = webElement[0];
+		passwordTxtBox = webElement[1];
+		signInBtn = webElement[2];
+
+		userNameTxtBox.sendKeys(uname);
+		passwordTxtBox.sendKeys(pwd);
+		signInBtn.click();
+
 	}
 
 }
